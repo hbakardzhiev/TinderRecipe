@@ -1,0 +1,33 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.5.0'
+    id 'application'
+}
+
+group = 'me.user'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+def exposedVersion = "0.32.1"
+dependencies {
+    compile "io.ktor:ktor-server-netty:1.6.2"
+    compile 'com.apurebase:kgraphql:version'
+    compile "com.apurebase:kgraphql-ktor:version"
+    compile 'org.postgresql:postgresql:42.2.23.jre7'
+    implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = '11'
+}
+
+compileTestKotlin {
+    kotlinOptions.jvmTarget = '11'
+}
+
+application {
+    mainClassName = 'MainKt'
+}
