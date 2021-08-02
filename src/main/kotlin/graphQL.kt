@@ -3,7 +3,7 @@ import services.PostsService
 
 fun SchemaBuilder.posts(service: PostsService) {
 
-    type<Post>()
+    type<PostDTO>()
 //    query("droid") {
 //        resolver { id: String,
 //            ->

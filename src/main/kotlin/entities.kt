@@ -1,3 +1,3 @@
-data class Post (
+data class PostDTO (
     val name: String,
 )

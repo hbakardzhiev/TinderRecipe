@@ -1,6 +1,6 @@
 package services
 
-import Post
+import PostDTO
 import database.synchronizeMemoryDB
 import databaseEntities.Posts
 import org.jetbrains.exposed.sql.ResultRow
@@ -8,8 +8,8 @@ import org.jetbrains.exposed.sql.ResultRow
 class PostsService {
     private var posts: List<ResultRow> = synchronizeMemoryDB()
 
-    fun getPosts(): List<Post> {
+    fun getPosts(): List<PostDTO> {
         posts = synchronizeMemoryDB()
-        return posts.map { Post(name = it[Posts.name]) }
+        return posts.map { PostDTO(name = it[Posts.name]) }
     }
 }
