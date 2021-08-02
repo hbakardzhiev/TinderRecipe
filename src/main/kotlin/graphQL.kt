@@ -1,26 +1,35 @@
+import com.apurebase.kgraphql.Context
 import com.apurebase.kgraphql.schema.dsl.SchemaBuilder
+import authenticate.model.AuthenticationContext
+import services.AccountService
 import services.PostsService
+
+fun SchemaBuilder.authentication(service: AccountService) {
+
+    query("authenticate") {
+        resolver { username: String ->
+            val result = service.returnAccessCode(username)
+            result
+        }
+    }
+
+}
 
 fun SchemaBuilder.posts(service: PostsService) {
 
     type<PostDTO>()
-//    query("droid") {
-//        resolver { id: String,
-//            ->
-//            val result =
-//                service.getPosts(id)
-//            result
-//        }
-//    }
 
     query("posts") {
-        resolver {
+        resolver { ctx: Context
             ->
+            ctx.get<AuthenticationContext>()?.account
+                ?: throw Exception("Unauthenticated") // pass to methods for Permissions
             val result =
-               service.getPosts()
+                service.getPosts()
             result
         }
     }
+
 //
 //    mutation("addTodo") {
 //        resolver { text: String,
