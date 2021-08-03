@@ -12,9 +12,9 @@ val database = Database.connect (
     password = "postgres"
 )
 
-fun <T: IntIdTable> synchronizeMemoryDB(inputObject: T): List<ResultRow> {
+fun <T: IntIdTable> synchronizeMemoryDB(inputObject: T): Iterable<ResultRow> {
     return transaction {
         val result = inputObject.selectAll()
-        result.filterNotNull().toList()
+        result.filterNotNull()
     }
 }
