@@ -1,10 +1,11 @@
 package authenticate
 
-import io.ktor.application.*
-import io.ktor.http.*
-import io.ktor.response.*
-import io.ktor.util.*
-import io.ktor.util.pipeline.*
+import io.ktor.application.ApplicationCall
+import io.ktor.application.call
+import io.ktor.http.HttpStatusCode
+import io.ktor.response.respond
+import io.ktor.util.AttributeKey
+import io.ktor.util.pipeline.PipelineContext
 import authenticate.model.Account
 import authenticate.model.AuthenticationContext
 import services.AccountService

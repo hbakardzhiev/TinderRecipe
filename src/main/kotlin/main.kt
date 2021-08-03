@@ -1,13 +1,14 @@
 import database.database
 import databaseEntities.Posts
-import io.ktor.application.*
-import io.ktor.server.engine.*
-import io.ktor.server.netty.*
+import io.ktor.application.Application
+import io.ktor.server.engine.embeddedServer
+import io.ktor.server.netty.Netty
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
+private const val CONST_PORT = 8080
 
 fun main() {
-    val port = System.getenv("PORT")?.toInt() ?: 8080
+    val port = System.getenv("PORT")?.toInt() ?: CONST_PORT
 
     database.connector.invoke()
 

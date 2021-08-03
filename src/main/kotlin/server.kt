@@ -2,8 +2,6 @@ import authenticate.authenticate
 import authenticate.getContext
 import com.apurebase.kgraphql.GraphQL
 import io.ktor.application.*
-import io.ktor.features.*
-import io.ktor.http.*
 import services.AccountService
 import services.PostsService
 
