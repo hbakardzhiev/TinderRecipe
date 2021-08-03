@@ -5,7 +5,6 @@ import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
-private const val CONST_PORT = 8080
 
 fun main() {
     val port = System.getenv("PORT")?.toInt() ?: CONST_PORT

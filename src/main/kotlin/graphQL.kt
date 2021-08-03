@@ -3,6 +3,7 @@ import com.apurebase.kgraphql.schema.dsl.SchemaBuilder
 import authenticate.model.AuthenticationContext
 import services.AccountService
 import services.PostsService
+import javax.security.sasl.AuthenticationException
 
 fun SchemaBuilder.authentication(service: AccountService) {
 
@@ -23,7 +24,7 @@ fun SchemaBuilder.posts(service: PostsService) {
         resolver { ctx: Context
             ->
             ctx.get<AuthenticationContext>()?.account
-                ?: throw Exception("Unauthenticated") // pass to methods for Permissions
+                ?: throw AuthenticationException("Unauthenticated") // pass to methods for Permissions
             val result =
                 service.getPosts()
             result
