@@ -1,5 +1,6 @@
 import database.database
-import databaseEntities.Posts
+import database.entities.Post
+import database.entities.User
 import io.ktor.application.Application
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
@@ -12,13 +13,17 @@ fun main() {
     database.connector.invoke()
 
     transaction {
-        SchemaUtils.create(Posts)
+        SchemaUtils.create(Post)
+        SchemaUtils.create(User)
+
+//        val hristo = User.insert {
+//            it[name] = "Hristo"
+//        }
+//        val nevena = User.insert {
+//            it[name] = "Nevena"
+//        }
     }
 
-//    database.droids.add(droid
-//    println(query.iterator().next().get())
-
     embeddedServer(Netty, port = port, module = Application::module).start(wait = true)
-
 
 }

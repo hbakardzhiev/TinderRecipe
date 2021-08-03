@@ -6,11 +6,11 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.response.respond
 import io.ktor.util.AttributeKey
 import io.ktor.util.pipeline.PipelineContext
-import authenticate.model.Account
 import authenticate.model.AuthenticationContext
+import dtos.UserDTO
 import services.AccountService
 
-val accountKey = AttributeKey<Account>("account")
+val accountKey = AttributeKey<UserDTO>("account")
 
 suspend fun PipelineContext<Unit, ApplicationCall>.authenticate() {
 
@@ -29,7 +29,7 @@ suspend fun PipelineContext<Unit, ApplicationCall>.authenticate() {
 }
 
 fun getContext(call: ApplicationCall): AuthenticationContext {
-    var account: Account? = null
+    var account: UserDTO? = null
     if (call.attributes.contains(accountKey)) {
         account = call.attributes[accountKey]
     }

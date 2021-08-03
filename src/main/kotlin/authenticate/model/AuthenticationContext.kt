@@ -1,3 +1,5 @@
 package authenticate.model
 
-data class AuthenticationContext(val account: Account?)
+import dtos.UserDTO
+
+data class AuthenticationContext(val account: UserDTO?)

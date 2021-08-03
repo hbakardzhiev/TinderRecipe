@@ -2,14 +2,13 @@ package services
 
 import PostDTO
 import database.synchronizeMemoryDB
-import databaseEntities.Posts
-import org.jetbrains.exposed.sql.ResultRow
+import database.entities.Post
 
 class PostsService {
-    private var posts: List<ResultRow> = synchronizeMemoryDB()
 
     fun getPosts(): List<PostDTO> {
-        posts = synchronizeMemoryDB()
-        return posts.map { PostDTO(name = it[Posts.name]) }
+        val posts = synchronizeMemoryDB(Post)
+        return posts.map { PostDTO(name = it[Post.name]) }
     }
+
 }

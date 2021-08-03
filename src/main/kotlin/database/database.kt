@@ -1,6 +1,6 @@
 package database
 
-import databaseEntities.Posts
+import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.selectAll
@@ -12,9 +12,9 @@ val database = Database.connect (
     password = "postgres"
 )
 
-fun synchronizeMemoryDB(): List<ResultRow> {
+fun <T: IntIdTable> synchronizeMemoryDB(inputObject: T): List<ResultRow> {
     return transaction {
-        val result = Posts.selectAll()
+        val result = inputObject.selectAll()
         result.filterNotNull().toList()
     }
 }
