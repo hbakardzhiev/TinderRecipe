@@ -1,3 +1,5 @@
+[![Scan with Detekt](https://github.com/hbakardzhiev/TinderRecipe/actions/workflows/detekt-analysis.yml/badge.svg)](https://github.com/hbakardzhiev/TinderRecipe/actions/workflows/detekt-analysis.yml)
+
 # TinderRecipe
 ###Project description
 This project contains the back end for a handy and useful 
