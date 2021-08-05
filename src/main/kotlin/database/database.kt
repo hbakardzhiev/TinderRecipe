@@ -14,7 +14,6 @@ val database = Database.connect (
 
 fun <T: IntIdTable> synchronizeMemoryDB(inputObject: T): Iterable<ResultRow> {
     return transaction {
-        val result = inputObject.selectAll()
-        result.filterNotNull()
+        inputObject.selectAll().filterNotNull()
     }
 }
