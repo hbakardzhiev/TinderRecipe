@@ -10,3 +10,9 @@ object Post : IntIdTable("posts") {
 object User : IntIdTable("user") {
     val name = varchar("name", CONST_VARCHAR_LENGTH)
 }
+
+object Chef : IntIdTable("chef") {
+    val name = varchar("name", CONST_VARCHAR_LENGTH)
+    val score = integer("score")//score for chef
+//(depends on how many people have liked recipes?)
+}
