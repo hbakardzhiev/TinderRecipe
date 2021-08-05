@@ -29,10 +29,6 @@ suspend fun PipelineContext<Unit, ApplicationCall>.authenticate() {
 }
 
 fun getContext(call: ApplicationCall): AuthenticationContext {
-    var account: UserDTO? = null
-    if (call.attributes.contains(accountKey)) {
-        account = call.attributes[accountKey]
-    }
-
+    val account: UserDTO? =  call.attributes.getOrNull(accountKey)
     return AuthenticationContext(account)
 }
