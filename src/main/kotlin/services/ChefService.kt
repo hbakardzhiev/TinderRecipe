@@ -9,7 +9,7 @@ class ChefService {
 
     fun getChefs(): List<ChefDTO> {
         val posts = synchronizeMemoryDB(Post)
-        return posts.map { ChefDTO(name = it[Chef.name],) }
+        return posts.map { ChefDTO(name = it[Chef.name], score = it[Chef.score]) }
     }
 
 }
