@@ -1,9 +1,13 @@
+package graphQL
+
+import authenticate.model.AuthenticationContext
+import authenticate.model.AuthenticationException
 import com.apurebase.kgraphql.Context
 import com.apurebase.kgraphql.schema.dsl.SchemaBuilder
-import authenticate.model.AuthenticationContext
+import dtos.PostDTO
+import graphQL.inputTypes.PostInput
 import services.AccountService
 import services.PostsService
-import javax.security.sasl.AuthenticationException
 
 fun SchemaBuilder.authentication(service: AccountService) {
 
@@ -19,36 +23,26 @@ fun SchemaBuilder.authentication(service: AccountService) {
 fun SchemaBuilder.posts(service: PostsService) {
 
     type<PostDTO>()
-
     query("posts") {
-        resolver { ctx: Context
+        resolver { ctx: Context, first: Int?, afterID: Int?
             ->
             ctx.get<AuthenticationContext>()?.account
-                ?: throw AuthenticationException("Unauthenticated") // pass to methods for Permissions
+                ?: throw AuthenticationException()
             val result =
-                service.getPosts()
+                service.getPosts(first, afterID)
             result
         }
     }
 
-//
-//    mutation("addTodo") {
-//        resolver { text: String,
-//                   completed: Boolean,
-//                   scopeId: String,
-//                   rootTodo: Boolean,
-//                   parentTodoId: String?,
-//                   ctx: Context
-//            ->
-//            val log = ctx.get<Logger>()!!
-//            val result = catchExceptions {
-//                val user: LoggedInUser = ctx.get() ?: throw NotLoggedInExceptionException("Not Logged In")
-//                service.addTodo(user, text, completed, scopeId, rootTodo, parentTodoId)
-//            }
-//            log.info(result.toString())
-//            result.first
-//        }
-//    }
+    mutation("addPost") {
+        resolver { post: PostInput, ctx: Context
+            ->
+            ctx.get<AuthenticationContext>()?.account
+                ?: throw AuthenticationException()
+            service.createPost(post)
+        }
+    }
+    inputType<PostInput>()
 //
 //    mutation("updateTodo") {
 //        resolver { id: String,
