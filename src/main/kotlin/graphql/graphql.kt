@@ -1,11 +1,11 @@
-package graphQL
+package graphql
 
 import authenticate.model.AuthenticationContext
 import authenticate.model.AuthenticationException
 import com.apurebase.kgraphql.Context
 import com.apurebase.kgraphql.schema.dsl.SchemaBuilder
 import dtos.PostDTO
-import graphQL.inputTypes.PostInput
+import graphql.inputtypes.PostInput
 import services.AccountService
 import services.PostsService
 

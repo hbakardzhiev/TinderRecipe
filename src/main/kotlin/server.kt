@@ -1,8 +1,8 @@
 import authenticate.authenticate
 import authenticate.getContext
 import com.apurebase.kgraphql.GraphQL
-import graphQL.authentication
-import graphQL.posts
+import graphql.authentication
+import graphql.posts
 import io.ktor.application.Application
 import io.ktor.application.ApplicationCallPipeline
 import io.ktor.application.install
