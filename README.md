@@ -9,10 +9,13 @@ When a recipe is liked, it will be saved in user's favorite recipes,
 and there they can look at it later. 
 
 
-###Languages and tools
+###Languages, frameworks and systems
 * ***Kotlin*** - *main coding language*
-* ***PostgreSQL*** - *the free open-source database that we use*
+* ***PostgreSQL*** - *the free open-source database management system that we use*
 * ***GraphQL*** - *an open-source data query and manipulation language for APIs*
+* ***Exposed*** - *an ORM framework for Kotlin that supports database
+management*
+* ***Ktor*** - *a Kotlin framework for building asynchronous servers*
 
 ###Instalition and Set up
 
@@ -21,8 +24,8 @@ and there they can look at it later.
    **[IntelliJ IDEA](https://www.jetbrains.com/idea/download/#section=windows)**) \
    *Highly recommended is  to use a version **2021 or higher!***
 3. Download **[PostgreSQL](https://www.postgresql.org/)**
-- *username?*
-- *password?*
+- *username: postgres*
+- *password: postgres*
 
 3. After having PostgreSQL downloaded, create a new database
    called ***library*** with pgAdmin 4.\
