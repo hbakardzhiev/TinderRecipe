@@ -3,7 +3,7 @@ package services
 import dtos.PostDTO
 import database.synchronizeMemoryDB
 import database.entities.Post
-import graphQL.inputTypes.PostInput
+import graphql.inputtypes.PostInput
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction
 
