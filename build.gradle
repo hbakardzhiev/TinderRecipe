@@ -10,10 +10,16 @@ repositories {
     mavenCentral()
 }
 def exposedVersion = "0.32.1"
+def ktor_version = "1.6.2"
 dependencies {
-    compile "io.ktor:ktor-server-netty:1.6.2"
+    compile "io.ktor:ktor-server-netty:$ktor_version"
     compile 'com.apurebase:kgraphql:version'
     compile "com.apurebase:kgraphql-ktor:version"
+    implementation "io.ktor:ktor-server-sessions:$ktor_version"
+    implementation("io.ktor:ktor-auth:$ktor_version")
+    implementation("io.ktor:ktor-auth-jwt:$ktor_version")
+    implementation("at.favre.lib:bcrypt:0.9.0")
+    compile "org.hibernate.validator:hibernate-validator:6.1.1.Final"
     compile 'org.postgresql:postgresql:42.2.23.jre7'
     implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")

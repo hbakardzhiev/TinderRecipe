@@ -2,19 +2,40 @@ package graphql
 
 import authenticate.model.AuthenticationContext
 import authenticate.model.AuthenticationException
+import authenticate.model.UserAccount
+import authenticate.model.UserResponse
 import com.apurebase.kgraphql.Context
+import com.apurebase.kgraphql.context
 import com.apurebase.kgraphql.schema.dsl.SchemaBuilder
 import dtos.PostDTO
 import graphql.inputtypes.PostInput
-import services.AccountService
+import graphql.inputtypes.UserInput
+import services.AuthService
 import services.PostsService
 
-fun SchemaBuilder.authentication(service: AccountService) {
+fun SchemaBuilder.authentication(service: AuthService) {
 
-    query("authenticate") {
-        resolver { username: String ->
-            val result = service.returnAccessCode(username)
-            result
+    inputType<UserInput>()
+    type<UserAccount> {
+        UserAccount::hashedPassword.ignore()
+    }
+    query("signIn") {
+        resolver { userInput: UserInput ->
+            service.signIn(userInput)
+        }
+    }
+
+    mutation("signUp") {
+        resolver { userInput: UserInput ->
+            val ctxResult = service.signUp(userInput)
+
+            if (ctxResult != null) {
+
+                context {
+                    +ctxResult
+                }
+            }
+            ctxResult
         }
     }
 
@@ -26,7 +47,7 @@ fun SchemaBuilder.posts(service: PostsService) {
     query("posts") {
         resolver { ctx: Context, first: Int?, afterID: Int?
             ->
-            ctx.get<AuthenticationContext>()?.account
+            ctx.get<UserResponse>()?.user
                 ?: throw AuthenticationException()
             val result =
                 service.getPosts(first, afterID)
@@ -34,6 +55,7 @@ fun SchemaBuilder.posts(service: PostsService) {
         }
     }
 
+    inputType<PostInput>()
     mutation("addPost") {
         resolver { post: PostInput, ctx: Context
             ->
@@ -42,7 +64,6 @@ fun SchemaBuilder.posts(service: PostsService) {
             service.createPost(post)
         }
     }
-    inputType<PostInput>()
 //
 //    mutation("updateTodo") {
 //        resolver { id: String,

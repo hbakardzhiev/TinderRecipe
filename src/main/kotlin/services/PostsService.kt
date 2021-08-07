@@ -11,7 +11,7 @@ class PostsService {
 
     fun getPosts(first: Int?, afterID: Int?): List<PostDTO> {
         val posts = postDTO()
-        val index = afterID ?: (posts.first().id - 1)
+        val index = afterID ?: 0
         val numberOfElementToOutput = (first ?: posts.size) - 1
         return posts.slice(IntRange(index, numberOfElementToOutput))
     }

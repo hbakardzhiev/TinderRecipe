@@ -7,7 +7,10 @@ import io.ktor.response.respond
 import io.ktor.util.AttributeKey
 import io.ktor.util.pipeline.PipelineContext
 import authenticate.model.AuthenticationContext
+import authenticate.model.UserSession
 import dtos.UserDTO
+import io.ktor.auth.*
+import io.ktor.sessions.*
 import services.AccountService
 
 val accountKey = AttributeKey<UserDTO>("account")
@@ -29,6 +32,7 @@ suspend fun PipelineContext<Unit, ApplicationCall>.authenticate() {
 }
 
 fun getContext(call: ApplicationCall): AuthenticationContext {
-    val account: UserDTO? =  call.attributes.getOrNull(accountKey)
-    return AuthenticationContext(account)
+    return AuthenticationContext(call.principal<UserSession>()?.id)
 }
+
+

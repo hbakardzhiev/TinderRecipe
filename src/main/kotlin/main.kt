@@ -1,6 +1,6 @@
 import database.database
 import database.entities.Post
-import database.entities.User
+import database.entities.Users
 import io.ktor.application.Application
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
@@ -15,7 +15,7 @@ fun main() {
 
     transaction {
         SchemaUtils.create(Post)
-        SchemaUtils.create(User)
+        SchemaUtils.create(Users)
 
 //        val hristo = User.insert {
 //            it[name] = "Hristo"
