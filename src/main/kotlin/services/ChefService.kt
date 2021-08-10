@@ -21,7 +21,7 @@ class ChefService {
      * @param idParam the id of the chef to be return
      * @return the chef with the given id if exists else null
      */
-    fun getChefById(idParam:Int): ChefDTO? {
+    private fun getChefById(idParam:Int): ChefDTO? {
         val chefs = getChefs()
         val chefsId = chefs.filter{ it.id == idParam }
         if(chefsId.size > 1) {

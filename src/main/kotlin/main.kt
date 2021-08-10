@@ -20,10 +20,10 @@ fun main() {
         SchemaUtils.create(User)
         SchemaUtils.create(Chef)
 
-        val hristo = Chef.insert {
-            it[name] = "Hristo"
-            it[score] = 100
-        }
+//        val hristo = Chef.insert {
+//            it[name] = "Hristo"
+//            it[score] = 100
+//        }
 //        val nevena = User.insert {
 //            it[name] = "Nevena"
 //        }
