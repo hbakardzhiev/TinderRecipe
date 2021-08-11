@@ -4,6 +4,8 @@ import database.entities.Chef
 import database.entities.Chef.score
 import database.synchronizeMemoryDB
 import dtos.ChefDTO
+import org.jetbrains.exposed.sql.transactions.transaction
+import org.jetbrains.exposed.sql.update
 
 class ChefService {
 
@@ -52,5 +54,19 @@ class ChefService {
         return chefs.slice(IntRange(0,number - 1))
     }
 
-
+    /**
+     * Increase or decrease the score of a given chef.
+     * @param id the id of the chef whose score is to be altered
+     * @param number the number which the score will be changed with
+     */
+    fun changeChefScore(id:Int, number: Int){
+        var chef = getChefById(id)
+        transaction{
+            Chef.update{
+                if(chef != null) {
+                    chef.score = chef.score + number
+                }
+            }
+        }
+    }
 }
