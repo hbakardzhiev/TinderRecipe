@@ -1,10 +1,12 @@
 import database.database
+import database.entities.Chef
 import database.entities.Post
 import database.entities.User
 import io.ktor.application.Application
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import org.jetbrains.exposed.sql.SchemaUtils
+import org.jetbrains.exposed.sql.insert
 //import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction
 
@@ -16,9 +18,11 @@ fun main() {
     transaction {
         SchemaUtils.create(Post)
         SchemaUtils.create(User)
+        SchemaUtils.create(Chef)
 
-//        val hristo = User.insert {
+//        val hristo = Chef.insert {
 //            it[name] = "Hristo"
+//            it[score] = 100
 //        }
 //        val nevena = User.insert {
 //            it[name] = "Nevena"

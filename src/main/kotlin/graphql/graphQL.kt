@@ -7,6 +7,7 @@ import com.apurebase.kgraphql.schema.dsl.SchemaBuilder
 import dtos.PostDTO
 import graphql.inputtypes.PostInput
 import services.AccountService
+import services.ChefService
 import services.PostsService
 
 fun SchemaBuilder.authentication(service: AccountService) {
@@ -18,6 +19,20 @@ fun SchemaBuilder.authentication(service: AccountService) {
         }
     }
 
+}
+
+fun SchemaBuilder.chefs(service: ChefService){
+
+    query("chefs") {
+        resolver { ctx: Context
+            ->
+            ctx.get<AuthenticationContext>()?.account
+                ?: throw AuthenticationException()
+            val result =
+                service.getChefs()
+            result
+        }
+    }
 }
 
 fun SchemaBuilder.posts(service: PostsService) {
