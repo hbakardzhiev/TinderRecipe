@@ -21,5 +21,5 @@ object Recipe : IntIdTable("recipes") {
     val name = varchar("name", CONST_VARCHAR_LENGTH)
     val category = varchar("category",CONST_VARCHAR_LENGTH)
 //    val image =
-    val chef = reference("chef", Chef)
+    val chef = (integer("chef").references(Chef.id))
 }
